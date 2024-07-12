@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyEC2Instance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      SecurityGroupIds:
+        - "sg-08ac310a2dfa40924"
+      KeyName: "Testingkey"
+      ImageId: "ami-0ec0e125bb6c6e8ec"
+      InstanceType: "t2.micro"
+      AvailabilityZone: "ap-south-1a"
+      SubnetId: "subnet-0e8c806dc59c355df"
+  
+  DemoDbInstance:
+    Type: "AWS::RDS::DBInstance"
+    Properties:
+      AllocatedStorage: 20
+      DBName: "demo"
+      AvailabilityZone: "ap-south-1a"
+      Engine: "mysql"
+      DBInstanceClass: "db.t3.micro"
+      MasterUsername: "admin"
+      MasterUserPassword: "Adminaws"
+      PubliclyAccessible: false
+      StorageEncrypted: true 
+      DBSubnetGroupName: "rds-subnet"
+  
