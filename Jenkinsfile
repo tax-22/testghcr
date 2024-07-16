@@ -1,37 +1,40 @@
 pipeline {
     agent any
+    
     stages {
-        agent{
-            label "master"
-        }
         stage('main') {
-            when{
+            when {
                 branch 'main'
-                beforeAgent true
             }
-            agent{ label "master"}
+            agent {
+                label 'master'
+            }
             steps {
                 echo 'Hello World from Main branch'
             }
         }
-        stage('dev'){
-            when{
+        
+        stage('dev') {
+            when {
                 branch 'dev'
-                beforeAgent true
             }
-            agent {label "node1"}
-            steps{
-                echo "Deploying in dev"
+            agent {
+                label 'node1'
+            }
+            steps {
+                echo 'Deploying in dev'
             }
         }
-        stage('prod'){
-            when{
+        
+        stage('prod') {
+            when {
                 branch 'prod'
-                beforeAgent true
             }
-            agent {label "master"}
-            steps{
-                echo "Deploying in prod"
+            agent{
+                label 'master'
+            }
+            steps {
+                echo 'Deploying in prod'
             }
         }
     }
